@@ -1,31 +1,22 @@
 version: '3.8'
-
 services:
-    db:
-        image: postgres:latest
-        container_name: kit5_postgres_db
-        environment:
-            POSTGRES_USER: 'user'
-            POSTGRES_PASSWORD: 'azeAZE123'
-            POSTGRES_DB: 'kit5'
-        volumes:
-            - db_data:/var/lib/postgresql/data
-        ports:
-            - "5432:5432"
+  db:
+      image: mysql:5.7
+      environment:
+        MYSQL_DATABASE: 'kit5'
+        MYSQL_USER: 'user'
+        MYSQL_PASSWORD: 'motdepasse'
+        MYSQL_ROOT_PASSWORD: 'motdepasse_root'
+      ports:
+        - "3306:3306"
+      volumes:
+        - my_db_volume:/var/lib/mysql
 
-    phppgadmin:
-        image: dockage/phppgadmin
-        container_name: phppgadmin
-        environment:
-        - PHP_PG_ADMIN_SERVER_HOST=db
-        - PHP_PG_ADMIN_SERVER_PORT=5432
-        - PHP_PG_ADMIN_SERVER_DEFAULT_DB=user
-        ports:
-        - "8080:80"
-        depends_on:
-        - db
-
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+    ports:
+      - "8080:80"
 volumes:
-  db_data:
-
-## docker exec -it kit5_postgres_db psql -U user -d kit5
+  my_db_volume:
