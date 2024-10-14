@@ -10,11 +10,14 @@ import lombok.ToString;
 @ToString
 @Table(name = "admin")
 public class Admin {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long adminId;
 
-    @OneToOne
-    private UserAdmin userAdmin;
+    private String role;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

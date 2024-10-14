@@ -27,12 +27,11 @@ public class User {
     private LocalDateTime createdAt;
 
     @OneToOne(mappedBy = "user")
-    private UserStudent userStudent;
+    private Student student;
 
     @OneToOne(mappedBy = "user")
-    private UserProfessor userProfessor;
+    private Professor professor;
 
     @OneToOne(mappedBy = "user")
-    private UserAdmin userAdmin;
-
+    private Admin admin;
 }

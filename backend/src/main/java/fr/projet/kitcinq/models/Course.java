@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,21 +14,33 @@ import java.util.Set;
 @ToString
 @Table(name = "course")
 public class Course {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;
 
-    @OneToMany(mappedBy = "course")
-    private Set<StudentCourse> studentCourses;
+    private String name;
+    private Date courseDate;
 
-    @OneToMany(mappedBy = "course")
-    private Set<ProfessorCourse> professorCourses;
+    @ManyToOne
+//    @JoinColumn(name = "subject_id")
+    @JoinTable(
+            name = "course_subject",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id"))
+    private Subject subject;
 
-    @OneToMany(mappedBy = "course")
-    private Set<FormationCourse> formationCourses;
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students;
 
-    @OneToMany(mappedBy = "course")
-    private Set<SubjectCourse> subjectCourses;
+    @ManyToMany(mappedBy = "courses")
+    private List<Professor> professors;
 
-    // Getters, Setters, Constructors
+    @ManyToOne
+    @JoinColumn(name = "formation_id")
+        @JoinTable(
+            name = "formation_course",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "formation_id"))
+    private Formation formation;
 }
