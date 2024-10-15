@@ -1,18 +1,18 @@
-package fr.projet.kitcinq.models;
+package fr.projet.kitcinq.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String identifiant;
+    private String label;
 
     @Column(nullable = false)
     private String password;
@@ -21,13 +21,13 @@ public class User {
     private LocalDateTime createdAt;
 
     @OneToOne(mappedBy = "users")
-    private Student student;
+    private StudentEntity student;
 
     @OneToOne(mappedBy = "users")
-    private Professor professor;
+    private ProfessorEntity professor;
 
     @OneToOne(mappedBy = "users")
-    private Admin admin;
+    private AdminEntity admin;
 
     public Long getId() {
         return id;
@@ -37,12 +37,12 @@ public class User {
         this.id = id;
     }
 
-    public String getIdentifiant() {
-        return identifiant;
+    public String getLabel() {
+        return label;
     }
 
-    public void setIdentifiant(String identifiant) {
-        this.identifiant = identifiant;
+    public void setLabel(String identifiant) {
+        this.label = identifiant;
     }
 
     public String getPassword() {
@@ -61,27 +61,27 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    public Student getStudent() {
+    public StudentEntity getStudent() {
         return student;
     }
 
-    public void setStudent(Student student) {
+    public void setStudent(StudentEntity student) {
         this.student = student;
     }
 
-    public Professor getProfessor() {
+    public ProfessorEntity getProfessor() {
         return professor;
     }
 
-    public void setProfessor(Professor professor) {
+    public void setProfessor(ProfessorEntity professor) {
         this.professor = professor;
     }
 
-    public Admin getAdmin() {
+    public AdminEntity getAdmin() {
         return admin;
     }
 
-    public void setAdmin(Admin admin) {
+    public void setAdmin(AdminEntity admin) {
         this.admin = admin;
     }
 
@@ -89,7 +89,7 @@ public class User {
     public String toString() {
         return "User{" +
                "id=" + id +
-               ", identifiant='" + identifiant + '\'' +
+               ", label='" + label + '\'' +
                ", password='" + password + '\'' +
                ", createdAt=" + createdAt +
                ", student=" + student +

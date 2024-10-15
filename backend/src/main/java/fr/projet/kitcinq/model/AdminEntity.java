@@ -1,23 +1,21 @@
-package fr.projet.kitcinq.models;
+package fr.projet.kitcinq.model;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "admin")
-public class Admin {
+public class AdminEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long adminId;
-
-    private String role;
-
+    
     @OneToOne
 //    @JoinColumn(name = "users")
     @JoinTable(
             name = "users_admin",
             joinColumns = @JoinColumn(name = "admin_id"),
             inverseJoinColumns = @JoinColumn(name = "users_id"))
-    private User users;
+    private UserEntity users;
 
     public Long getAdminId() {
         return adminId;
@@ -27,27 +25,18 @@ public class Admin {
         this.adminId = adminId;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public User getUsers() {
+    public UserEntity getUsers() {
         return users;
     }
 
-    public void setUsers(User users) {
+    public void setUsers(UserEntity users) {
         this.users = users;
     }
 
     @Override
     public String toString() {
-        return "Admin{" +
+        return "AdminEntity{" +
                "adminId=" + adminId +
-               ", role='" + role + '\'' +
                ", users=" + users +
                '}';
     }
