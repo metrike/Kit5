@@ -4,15 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @ToString
-@Table(name = "user_admin")
-
+@Table(name = "professor")
 public class Professor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long professorId;
@@ -20,14 +21,22 @@ public class Professor {
     private String nom;
     private String prenom;
 
-    @OneToMany(mappedBy = "professor")
-    private Set<ProfessorCourse> professorCourses;
-
-    @OneToMany(mappedBy = "professor")
-    private Set<ProfessorFormation> professorFormations;
-
     @OneToOne
-    private UserProfessor userProfessor;
+//    @JoinColumn(name = "users_id")
+    @JoinTable(
+            name = "professor_user",
+            joinColumns = @JoinColumn(name = "professor_id"),
+            inverseJoinColumns = @JoinColumn(name = "users_id"))
+    private User users;
 
-    // Getters, Setters, Constructors
+    @ManyToOne
+    @JoinColumn(name = "formation_id")
+    private Formation formation;
+
+    @ManyToMany
+//    @JoinTable(
+//            name = "professor_course",
+//            joinColumns = @JoinColumn(name = "professor_id"),
+//            inverseJoinColumns = @JoinColumn(name = "course_id"))
+    private List<Course> courses;
 }
