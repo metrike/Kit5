@@ -13,7 +13,6 @@ public class StudentEntity {
 
     private String lastName;
     private String firstName;
-    private String label;
 
     @OneToOne
 //    @JoinColumn(name = "users_id")
@@ -61,14 +60,6 @@ public class StudentEntity {
         this.firstName = prenom;
     }
 
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
     public UserEntity getUsers() {
         return users;
     }
@@ -99,7 +90,6 @@ public class StudentEntity {
                "studentId=" + studentId +
                ", nom='" + lastName + '\'' +
                ", prenom='" + firstName + '\'' +
-               ", label='" + label + '\'' +
                ", users=" + users +
                ", formation=" + formation +
                ", courses=" + courses +
