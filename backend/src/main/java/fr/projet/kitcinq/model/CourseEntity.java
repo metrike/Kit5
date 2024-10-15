@@ -1,20 +1,19 @@
-package fr.projet.kitcinq.models;
+package fr.projet.kitcinq.model;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "course")
-public class Course {
+public class CourseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;
 
     private String name;
-    private Date courseDate;
+    private LocalDateTime courseAt;
 
     @ManyToOne
 //    @JoinColumn(name = "subject_id")
@@ -22,13 +21,13 @@ public class Course {
             name = "course_subject",
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "subject_id"))
-    private Subject subject;
+    private SubjectEntity subject;
 
     @ManyToMany(mappedBy = "courses")
-    private List<Student> students;
+    private List<StudentEntity> students;
 
     @ManyToMany(mappedBy = "courses")
-    private List<Professor> professors;
+    private List<ProfessorEntity> professors;
 
     @ManyToOne
     @JoinColumn(name = "formation_id")
@@ -36,7 +35,7 @@ public class Course {
             name = "formation_course",
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "formation_id"))
-    private Formation formation;
+    private FormationEntity formation;
 
     public Long getCourseId() {
         return courseId;
@@ -54,52 +53,52 @@ public class Course {
         this.name = name;
     }
 
-    public Date getCourseDate() {
-        return courseDate;
+    public LocalDateTime getCourseAt() {
+        return courseAt;
     }
 
-    public void setCourseDate(Date courseDate) {
-        this.courseDate = courseDate;
+    public void setCourseAt(LocalDateTime courseDate) {
+        this.courseAt = courseDate;
     }
 
-    public Subject getSubject() {
+    public SubjectEntity getSubject() {
         return subject;
     }
 
-    public void setSubject(Subject subject) {
+    public void setSubject(SubjectEntity subject) {
         this.subject = subject;
     }
 
-    public List<Student> getStudents() {
+    public List<StudentEntity> getStudents() {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(List<StudentEntity> students) {
         this.students = students;
     }
 
-    public List<Professor> getProfessors() {
+    public List<ProfessorEntity> getProfessors() {
         return professors;
     }
 
-    public void setProfessors(List<Professor> professors) {
+    public void setProfessors(List<ProfessorEntity> professors) {
         this.professors = professors;
     }
 
-    public Formation getFormation() {
+    public FormationEntity getFormation() {
         return formation;
     }
 
-    public void setFormation(Formation formation) {
+    public void setFormation(FormationEntity formation) {
         this.formation = formation;
     }
 
     @Override
     public String toString() {
-        return "Course{" +
+        return "CourseEntity{" +
                "courseId=" + courseId +
                ", name='" + name + '\'' +
-               ", courseDate=" + courseDate +
+               ", courseDate=" + courseAt +
                ", subject=" + subject +
                ", students=" + students +
                ", professors=" + professors +
