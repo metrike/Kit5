@@ -1,19 +1,18 @@
-package fr.projet.kitcinq.models;
+package fr.projet.kitcinq.model;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "professor")
-public class Professor {
+public class ProfessorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long professorId;
 
-    private String nom;
-    private String prenom;
+    private String lastName;
+    private String firstName;
 
     @OneToOne
 //    @JoinColumn(name = "users_id")
@@ -21,18 +20,18 @@ public class Professor {
             name = "professor_user",
             joinColumns = @JoinColumn(name = "professor_id"),
             inverseJoinColumns = @JoinColumn(name = "users_id"))
-    private User users;
+    private UserEntity users;
 
     @ManyToOne
     @JoinColumn(name = "formation_id")
-    private Formation formation;
+    private FormationEntity formation;
 
     @ManyToMany
 //    @JoinTable(
 //            name = "professor_course",
 //            joinColumns = @JoinColumn(name = "professor_id"),
 //            inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private List<Course> courses;
+    private List<CourseEntity> courses;
 
     public Long getProfessorId() {
         return professorId;
@@ -42,43 +41,43 @@ public class Professor {
         this.professorId = professorId;
     }
 
-    public String getNom() {
-        return nom;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setLastName(String nom) {
+        this.lastName = nom;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setFirstName(String prenom) {
+        this.firstName = prenom;
     }
 
-    public User getUsers() {
+    public UserEntity getUsers() {
         return users;
     }
 
-    public void setUsers(User users) {
+    public void setUsers(UserEntity users) {
         this.users = users;
     }
 
-    public Formation getFormation() {
+    public FormationEntity getFormation() {
         return formation;
     }
 
-    public void setFormation(Formation formation) {
+    public void setFormation(FormationEntity formation) {
         this.formation = formation;
     }
 
-    public List<Course> getCourses() {
+    public List<CourseEntity> getCourses() {
         return courses;
     }
 
-    public void setCourses(List<Course> courses) {
+    public void setCourses(List<CourseEntity> courses) {
         this.courses = courses;
     }
 
@@ -86,8 +85,8 @@ public class Professor {
     public String toString() {
         return "Professor{" +
                "professorId=" + professorId +
-               ", nom='" + nom + '\'' +
-               ", prenom='" + prenom + '\'' +
+               ", nom='" + lastName + '\'' +
+               ", prenom='" + firstName + '\'' +
                ", users=" + users +
                ", formation=" + formation +
                ", courses=" + courses +
