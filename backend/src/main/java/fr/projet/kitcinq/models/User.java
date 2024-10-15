@@ -7,9 +7,9 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user")
-@Getter
-@Setter
+@Table(name = "users")
+//@Getter
+//@Setter
 @ToString
 public class User {
 
@@ -26,12 +26,45 @@ public class User {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    @OneToOne(mappedBy = "user")
-    private Student student;
+//    @OneToOne(mappedBy = "users")
+//    private Student student;
+//
+//    @OneToOne(mappedBy = "users")
+//    private Professor professor;
+//
+//    @OneToOne(mappedBy = "users")
+//    private Admin admin;
 
-    @OneToOne(mappedBy = "user")
-    private Professor professor;
 
-    @OneToOne(mappedBy = "user")
-    private Admin admin;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getIdentifiant() {
+        return identifiant;
+    }
+
+    public void setIdentifiant(String identifiant) {
+        this.identifiant = identifiant;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }

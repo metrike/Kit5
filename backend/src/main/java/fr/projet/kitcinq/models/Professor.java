@@ -22,12 +22,12 @@ public class Professor {
     private String prenom;
 
     @OneToOne
-//    @JoinColumn(name = "user_id")
+//    @JoinColumn(name = "users_id")
     @JoinTable(
             name = "professor_user",
             joinColumns = @JoinColumn(name = "professor_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private User user;
+            inverseJoinColumns = @JoinColumn(name = "users_id"))
+    private User users;
 
     @ManyToOne
     @JoinColumn(name = "formation_id")

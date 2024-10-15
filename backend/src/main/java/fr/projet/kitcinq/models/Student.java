@@ -23,12 +23,12 @@ public class Student {
     private String label;
 
     @OneToOne
-//    @JoinColumn(name = "user_id")
+//    @JoinColumn(name = "users_id")
     @JoinTable(
             name = "user_student",
             joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private User user;
+            inverseJoinColumns = @JoinColumn(name = "users_id"))
+    private User users;
 
     @ManyToOne
     @JoinTable(

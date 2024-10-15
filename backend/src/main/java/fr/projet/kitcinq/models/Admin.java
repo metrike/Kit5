@@ -18,6 +18,10 @@ public class Admin {
     private String role;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+//    @JoinColumn(name = "users")
+    @JoinTable(
+            name = "users_admin",
+            joinColumns = @JoinColumn(name = "admin_id"),
+            inverseJoinColumns = @JoinColumn(name = "users_id"))
+    private User users;
 }
