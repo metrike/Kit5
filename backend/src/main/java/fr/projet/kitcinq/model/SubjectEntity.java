@@ -1,11 +1,11 @@
-package fr.projet.kitcinq.models;
+package fr.projet.kitcinq.model;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "subject")
-public class Subject {
+public class SubjectEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class Subject {
 //            name = "subject_course",
 //            joinColumns = @JoinColumn(name = "subject_id"),
 //            inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private List<Course> courses;
+    private List<CourseEntity> courses;
 
     public Long getSubjectId() {
         return subjectId;
@@ -36,11 +36,11 @@ public class Subject {
         this.name = name;
     }
 
-    public List<Course> getCourses() {
+    public List<CourseEntity> getCourses() {
         return courses;
     }
 
-    public void setCourses(List<Course> courses) {
+    public void setCourses(List<CourseEntity> courses) {
         this.courses = courses;
     }
 

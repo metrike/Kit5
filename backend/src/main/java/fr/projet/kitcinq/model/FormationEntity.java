@@ -1,12 +1,11 @@
-package fr.projet.kitcinq.models;
+package fr.projet.kitcinq.model;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "formation")
-public class Formation {
+public class FormationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,21 +18,21 @@ public class Formation {
 //            name = "student_formation",
 //            joinColumns = @JoinColumn(name = "formation_id"),
 //            inverseJoinColumns = @JoinColumn(name = "student_id"))
-    private List<Student> students;
+    private List<StudentEntity> students;
 
     @OneToMany(mappedBy = "formation")
 //    @JoinTable(
 //            name = "formation_professor",
 //            joinColumns = @JoinColumn(name = "formation_id"),
 //            inverseJoinColumns = @JoinColumn(name = "professor_id"))
-    private List<Professor> professors;
+    private List<ProfessorEntity> professors;
 
     @OneToMany(mappedBy = "formation")
 //    @JoinTable(
 //            name = "formation_course",
 //            joinColumns = @JoinColumn(name = "formation_id"),
 //            inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private List<Course> courses;
+    private List<CourseEntity> courses;
 
     public Long getFormationId() {
         return formationId;
@@ -51,27 +50,27 @@ public class Formation {
         this.name = name;
     }
 
-    public List<Student> getStudents() {
+    public List<StudentEntity> getStudents() {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(List<StudentEntity> students) {
         this.students = students;
     }
 
-    public List<Professor> getProfessors() {
+    public List<ProfessorEntity> getProfessors() {
         return professors;
     }
 
-    public void setProfessors(List<Professor> professors) {
+    public void setProfessors(List<ProfessorEntity> professors) {
         this.professors = professors;
     }
 
-    public List<Course> getCourses() {
+    public List<CourseEntity> getCourses() {
         return courses;
     }
 
-    public void setCourses(List<Course> courses) {
+    public void setCourses(List<CourseEntity> courses) {
         this.courses = courses;
     }
 
