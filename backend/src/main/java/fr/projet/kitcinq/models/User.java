@@ -1,16 +1,10 @@
 package fr.projet.kitcinq.models;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
-//@Getter
-//@Setter
-@ToString
 public class User {
 
     @Id
@@ -26,15 +20,14 @@ public class User {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-//    @OneToOne(mappedBy = "users")
-//    private Student student;
-//
-//    @OneToOne(mappedBy = "users")
-//    private Professor professor;
-//
-//    @OneToOne(mappedBy = "users")
-//    private Admin admin;
+    @OneToOne(mappedBy = "users")
+    private Student student;
 
+    @OneToOne(mappedBy = "users")
+    private Professor professor;
+
+    @OneToOne(mappedBy = "users")
+    private Admin admin;
 
     public Long getId() {
         return id;
@@ -66,5 +59,42 @@ public class User {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+               "id=" + id +
+               ", identifiant='" + identifiant + '\'' +
+               ", password='" + password + '\'' +
+               ", createdAt=" + createdAt +
+               ", student=" + student +
+               ", professor=" + professor +
+               ", admin=" + admin +
+               '}';
     }
 }

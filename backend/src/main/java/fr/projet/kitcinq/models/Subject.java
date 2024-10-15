@@ -1,16 +1,9 @@
 package fr.projet.kitcinq.models;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
-@Getter
-@Setter
-@ToString
 @Table(name = "subject")
 public class Subject {
 
@@ -26,4 +19,37 @@ public class Subject {
 //            joinColumns = @JoinColumn(name = "subject_id"),
 //            inverseJoinColumns = @JoinColumn(name = "course_id"))
     private List<Course> courses;
+
+    public Long getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(Long subjectId) {
+        this.subjectId = subjectId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    @Override
+    public String toString() {
+        return "Subject{" +
+               "subjectId=" + subjectId +
+               ", name='" + name + '\'' +
+               ", courses=" + courses +
+               '}';
+    }
 }

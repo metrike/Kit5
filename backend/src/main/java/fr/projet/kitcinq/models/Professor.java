@@ -1,16 +1,10 @@
 package fr.projet.kitcinq.models;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.util.List;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
-@ToString
 @Table(name = "professor")
 public class Professor {
 
@@ -39,4 +33,64 @@ public class Professor {
 //            joinColumns = @JoinColumn(name = "professor_id"),
 //            inverseJoinColumns = @JoinColumn(name = "course_id"))
     private List<Course> courses;
+
+    public Long getProfessorId() {
+        return professorId;
+    }
+
+    public void setProfessorId(Long professorId) {
+        this.professorId = professorId;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public User getUsers() {
+        return users;
+    }
+
+    public void setUsers(User users) {
+        this.users = users;
+    }
+
+    public Formation getFormation() {
+        return formation;
+    }
+
+    public void setFormation(Formation formation) {
+        this.formation = formation;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    @Override
+    public String toString() {
+        return "Professor{" +
+               "professorId=" + professorId +
+               ", nom='" + nom + '\'' +
+               ", prenom='" + prenom + '\'' +
+               ", users=" + users +
+               ", formation=" + formation +
+               ", courses=" + courses +
+               '}';
+    }
 }
