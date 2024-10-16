@@ -1,6 +1,7 @@
-package fr.projet.kitcinq.studentcall;
+package fr.projet.kitcinq.student.studentcall;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
+import fr.projet.kitcinq.student.studentcall.StudentCallService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

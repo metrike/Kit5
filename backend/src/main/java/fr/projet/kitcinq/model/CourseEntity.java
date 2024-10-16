@@ -102,10 +102,6 @@ public class CourseEntity {
         this.callPresence = callPresence;
     }
 
-    public void setCallPresence(Boolean callPresence) {
-        this.callPresence = callPresence;
-    }
-
     public List<StudentCourseEntity> getStudents() {
         return students;
     }

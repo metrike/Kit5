@@ -6,34 +6,9 @@ import java.util.Objects;
 
 @Embeddable
 public class StudentCourseId implements Serializable {
+
     private Long studentId;
     private Long courseId;
-
-    // Constructeurs, getters, setters, equals et hashCode
-
-    public StudentCourseId() {
-    }
-
-    public StudentCourseId(Long studentId, Long courseId) {
-        this.studentId = studentId;
-        this.courseId = courseId;
-    }
-
-    public Long getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
-    }
-
-    public Long getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
-    }
 
     public StudentCourseId() {}
 
