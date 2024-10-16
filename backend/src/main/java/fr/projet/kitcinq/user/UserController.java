@@ -1,5 +1,7 @@
 package fr.projet.kitcinq.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import fr.projet.kitcinq.model.TokenEntity;
 import fr.projet.kitcinq.model.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,26 +23,16 @@ public class UserController {
     public static final Logger LOG = LoggerFactory.getLogger(UserController.class);
     
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;  // Injection du PasswordEncoder
+    private final PasswordEncoder passwordEncoder;
+    private final TokenRepository tokenRepository;
 
-    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder, TokenRepository tokenRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.tokenRepository = tokenRepository;
     }
     
     public record CreateUserRequestBody(String label, String password) {}
-
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
-    @Transactional
-    public void create(@RequestBody CreateUserRequestBody body) {
-        var user = new UserEntity();
-        user.setLabel(body.label());
-        user.setPassword(body.password());
-        user.setCreatedAt(LocalDateTime.now());
-        
-        userRepository.save(user);
-    }
     
     public record GetAllUserResponse(Long id) {}
     
@@ -58,21 +50,20 @@ public class UserController {
     @Transactional
     public ResponseEntity<?> connect(@RequestBody CreateUserRequestBody body) {
         JwtService jwtTokenUtil = new JwtService();
-        // Find user by label
         UserEntity user = userRepository.findByLabel(body.label());
-
-        // Check if user exists and password is correct
-        System.out.println(user.getPassword());
-
         if (user != null && passwordEncoder.matches(body.password(), user.getPassword())) {
-            // Generate JWT token if authentication is successful
             String token = jwtTokenUtil.generateToken(user.getLabel());
-            user.setToken(token);
-            userRepository.save(user);
-            return ResponseEntity.ok(token);
+            TokenEntity tokenEntity = new TokenEntity();
+            tokenEntity.setUser(user);
+            tokenEntity.setCreatedAt(LocalDateTime.now());
+            tokenEntity.setToken(token);
+            tokenRepository.save(tokenEntity);
+
+            DataTransfertObject tokenResponse = new DataTransfertObject(token,"role");
+            return ResponseEntity.status(HttpStatus.OK).body(tokenResponse);
         }
 
-        // Return unauthorized status if credentials are invalid
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
     }
+
 }
