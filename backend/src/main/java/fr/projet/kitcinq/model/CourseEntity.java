@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "course")
@@ -13,18 +14,20 @@ public class CourseEntity {
     private Long courseId;
 
     private String name;
+
+    private Boolean callPresence;
+
     private LocalDateTime courseAt;
 
     @ManyToOne
-//    @JoinColumn(name = "subject_id")
     @JoinTable(
             name = "course_subject",
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "subject_id"))
     private SubjectEntity subject;
 
-    @ManyToMany(mappedBy = "courses")
-    private List<StudentEntity> students;
+    @OneToMany(mappedBy = "course")
+    private Set<StudentCourseEntity> students;
 
     @ManyToMany(mappedBy = "courses")
     private List<ProfessorEntity> professors;
@@ -69,14 +72,6 @@ public class CourseEntity {
         this.subject = subject;
     }
 
-    public List<StudentEntity> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<StudentEntity> students) {
-        this.students = students;
-    }
-
     public List<ProfessorEntity> getProfessors() {
         return professors;
     }
@@ -93,11 +88,20 @@ public class CourseEntity {
         this.formation = formation;
     }
 
+    public Boolean getCallPresence() {
+        return callPresence;
+    }
+
+    public void setCall(Boolean callPresence) {
+        this.callPresence = callPresence;
+    }
+
     @Override
     public String toString() {
         return "CourseEntity{" +
                "courseId=" + courseId +
                ", name='" + name + '\'' +
+                ", call=" + callPresence +
                ", courseDate=" + courseAt +
                ", subject=" + subject +
                ", students=" + students +
