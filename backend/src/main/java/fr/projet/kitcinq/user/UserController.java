@@ -62,7 +62,11 @@ public class UserController {
         UserEntity user = userRepository.findByLabel(body.label());
 
         // Check if user exists and password is correct
-        System.out.println(user.getPassword());
+        System.out.println(user.getAdmin());
+
+        System.out.println(user.getProfessor());
+
+        System.out.println(user.getStudent());
 
         if (user != null && passwordEncoder.matches(body.password(), user.getPassword())) {
             // Generate JWT token if authentication is successful

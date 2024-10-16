@@ -1,4 +1,4 @@
-package fr.projet.kitcinq.studentcall;
+package fr.projet.kitcinq.student.studentcall;
 
 import fr.projet.kitcinq.course.CourseRepository;
 import org.springframework.transaction.annotation.Transactional;

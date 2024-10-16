@@ -1,4 +1,4 @@
-package fr.projet.kitcinq.studentcall;
+package fr.projet.kitcinq.student.studentcall;
 
 public interface StudentCallService {
     

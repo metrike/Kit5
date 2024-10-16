@@ -1,6 +1,7 @@
 package fr.projet.kitcinq.model;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class SubjectEntity {
 //            name = "subject_course",
 //            joinColumns = @JoinColumn(name = "subject_id"),
 //            inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private List<CourseEntity> courses;
+    private List<CourseEntity> courses=new ArrayList<>();
 
     public Long getSubjectId() {
         return subjectId;
@@ -49,7 +50,6 @@ public class SubjectEntity {
         return "Subject{" +
                "subjectId=" + subjectId +
                ", name='" + name + '\'' +
-               ", courses=" + courses +
-               '}';
+                '}';
     }
 }

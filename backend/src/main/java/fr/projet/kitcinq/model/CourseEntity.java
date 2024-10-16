@@ -2,6 +2,8 @@ package fr.projet.kitcinq.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,10 +29,10 @@ public class CourseEntity {
     private SubjectEntity subject;
 
     @OneToMany(mappedBy = "course")
-    private Set<StudentCourseEntity> students;
+    private List<StudentCourseEntity> students = new ArrayList<>();
 
     @ManyToMany(mappedBy = "courses")
-    private List<ProfessorEntity> professors;
+    private List<ProfessorEntity> professors= new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "formation_id")
@@ -96,6 +98,17 @@ public class CourseEntity {
         this.callPresence = callPresence;
     }
 
+    public void setCallPresence(Boolean callPresence) {
+        this.callPresence = callPresence;
+    }
+
+    public List<StudentCourseEntity> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<StudentCourseEntity> students) {
+        this.students = students;
+    }
     @Override
     public String toString() {
         return "CourseEntity{" +
@@ -104,9 +117,10 @@ public class CourseEntity {
                 ", call=" + callPresence +
                ", courseDate=" + courseAt +
                ", subject=" + subject +
-               ", students=" + students +
-               ", professors=" + professors +
-               ", formation=" + formation +
+//               ", students=" + students +
+//               ", professors=" + professors +
+//               ", formation=" + formation +
                '}';
     }
+
 }
