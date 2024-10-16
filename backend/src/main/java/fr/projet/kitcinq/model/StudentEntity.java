@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "student")
-public class StudentEntity{
+@Table(name = "students")
+public class StudentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +17,7 @@ public class StudentEntity{
     private String firstName;
 
     @OneToOne
-    @JoinTable(
-            name = "user_student",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "users_id"))
-    private UserEntity users;
+    private UserEntity user;
 
     @ManyToOne
     @JoinTable(
@@ -57,12 +53,12 @@ public class StudentEntity{
         this.firstName = prenom;
     }
 
-    public UserEntity getUsers() {
-        return users;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUsers(UserEntity users) {
-        this.users = users;
+    public void setUser(UserEntity users) {
+        this.user = users;
     }
 
     public FormationEntity getFormation() {
@@ -79,9 +75,9 @@ public class StudentEntity{
                "studentId=" + studentId +
                ", nom='" + lastName + '\'' +
                ", prenom='" + firstName + '\'' +
-//               ", users=" + users +
-//               ", formation=" + formation +
-//               ", courses=" + courses +
+               ", users=" + user +
+               ", formation=" + formation +
+               ", courses=" + courses +
                '}';
     }
 }

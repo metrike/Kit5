@@ -1,5 +1,6 @@
 package fr.projet.kitcinq.model;
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,7 +12,7 @@ public class UserEntity {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String label;
+    private String username;
 
     @Column(nullable = false)
     private String password;
@@ -27,12 +28,12 @@ public class UserEntity {
         this.id = id;
     }
 
-    public String getLabel() {
-        return label;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLabel(String identifiant) {
-        this.label = identifiant;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -51,49 +52,13 @@ public class UserEntity {
         this.createdAt = createdAt;
     }
 
-    @OneToOne(mappedBy = "users")
-    private StudentEntity student;
-
-    @OneToOne(mappedBy = "users")
-    private ProfessorEntity professor;
-
-    public StudentEntity getStudent() {
-        return student;
-    }
-
-    public void setStudent(StudentEntity student) {
-        this.student = student;
-    }
-
-    public AdminEntity getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(AdminEntity admin) {
-        this.admin = admin;
-    }
-
-    public ProfessorEntity getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(ProfessorEntity professor) {
-        this.professor = professor;
-    }
-
-    @OneToOne(mappedBy = "users")
-    private AdminEntity admin;
-
     @Override
     public String toString() {
         return "UserEntity{" +
-                "id=" + id +
-                ", label='" + label + '\'' +
-                ", password='" + password + '\'' +
-                ", createdAt=" + createdAt +
-                ", student=" + student +
-                ", professor=" + professor +
-                ", admin=" + admin +
-                '}';
+               "id=" + id +
+               ", username='" + username + '\'' +
+               ", password='" + password + '\'' +
+               ", createdAt=" + createdAt +
+               '}';
     }
 }

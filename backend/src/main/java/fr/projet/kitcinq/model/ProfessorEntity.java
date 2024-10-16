@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "professor")
+@Table(name = "professors")
 public class ProfessorEntity {
 
     @Id
@@ -16,12 +16,7 @@ public class ProfessorEntity {
     private String firstName;
 
     @OneToOne
-//    @JoinColumn(name = "users_id")
-    @JoinTable(
-            name = "professor_user",
-            joinColumns = @JoinColumn(name = "professor_id"),
-            inverseJoinColumns = @JoinColumn(name = "users_id"))
-    private UserEntity users;
+    private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name = "formation_id")
@@ -62,12 +57,12 @@ public class ProfessorEntity {
         this.firstName = prenom;
     }
 
-    public UserEntity getUsers() {
-        return users;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUsers(UserEntity users) {
-        this.users = users;
+    public void setUser(UserEntity users) {
+        this.user = users;
     }
 
     public FormationEntity getFormation() {
@@ -92,7 +87,7 @@ public class ProfessorEntity {
                "professorId=" + professorId +
                ", nom='" + lastName + '\'' +
                ", prenom='" + firstName + '\'' +
-               ", users=" + users +
+               ", users=" + user +
                ", formation=" + formation +
                ", courses=" + courses +
                '}';

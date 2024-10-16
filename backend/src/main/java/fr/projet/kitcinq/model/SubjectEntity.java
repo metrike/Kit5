@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "subject")
+@Table(name = "subjects")
 public class SubjectEntity {
 
     @Id
