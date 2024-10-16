@@ -20,7 +20,7 @@ public class DataBaseCourseService implements CourseService {
     
     @PostConstruct
     public void a() {
-        create("Math", LocalDateTime.now(), 3);
+        //create("Math", LocalDateTime.now(), 3);
     }
 
     @Override

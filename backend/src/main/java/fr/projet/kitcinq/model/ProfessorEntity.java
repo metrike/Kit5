@@ -24,6 +24,10 @@ public class ProfessorEntity {
 
     @ManyToOne
     @JoinColumn(name = "formation_id")
+    @JoinTable(
+            name = "professor_formation",
+            joinColumns = @JoinColumn(name = "professor_id"),
+            inverseJoinColumns = @JoinColumn(name = "formation_id"))
     private FormationEntity formation;
 
     @ManyToMany
@@ -31,6 +35,8 @@ public class ProfessorEntity {
 //            name = "professor_course",
 //            joinColumns = @JoinColumn(name = "professor_id"),
 //            inverseJoinColumns = @JoinColumn(name = "course_id"))
+
+
     private List<CourseEntity> courses;
 
     public Long getProfessorId() {

@@ -32,6 +32,8 @@ public class FormationEntity {
 //            name = "formation_course",
 //            joinColumns = @JoinColumn(name = "formation_id"),
 //            inverseJoinColumns = @JoinColumn(name = "course_id"))
+
+
     private List<CourseEntity> courses;
 
     public Long getFormationId() {

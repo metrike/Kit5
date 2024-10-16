@@ -1,6 +1,6 @@
 package fr.projet.kitcinq.model;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -20,25 +20,28 @@ public class CourseEntity {
     private LocalDateTime courseAt;
 
     @ManyToOne
-    @JoinTable(
-            name = "course_subject",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "subject_id"))
+    @JoinColumn(name = "subject_id")  // Correct mapping to SubjectEntity
     private SubjectEntity subject;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course")  // Correct mapping to StudentCourseEntity
     private Set<StudentCourseEntity> students;
 
     @ManyToMany(mappedBy = "courses")
     private List<ProfessorEntity> professors;
 
     @ManyToOne
-    @JoinColumn(name = "formation_id")
-        @JoinTable(
-            name = "formation_course",
-            joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "formation_id"))
+    @JoinColumn(name = "formation_id")  // Correct mapping to FormationEntity
     private FormationEntity formation;
+
+    // Getters and setters
+
+    public Set<StudentCourseEntity> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<StudentCourseEntity> students) {
+        this.students = students;
+    }
 
     public Long getCourseId() {
         return courseId;
@@ -60,8 +63,8 @@ public class CourseEntity {
         return courseAt;
     }
 
-    public void setCourseAt(LocalDateTime courseDate) {
-        this.courseAt = courseDate;
+    public void setCourseAt(LocalDateTime courseAt) {
+        this.courseAt = courseAt;
     }
 
     public SubjectEntity getSubject() {
@@ -92,21 +95,21 @@ public class CourseEntity {
         return callPresence;
     }
 
-    public void setCall(Boolean callPresence) {
+    public void setCallPresence(Boolean callPresence) {
         this.callPresence = callPresence;
     }
 
     @Override
     public String toString() {
         return "CourseEntity{" +
-               "courseId=" + courseId +
-               ", name='" + name + '\'' +
-                ", call=" + callPresence +
-               ", courseDate=" + courseAt +
-               ", subject=" + subject +
-               ", students=" + students +
-               ", professors=" + professors +
-               ", formation=" + formation +
-               '}';
+                "courseId=" + courseId +
+                ", name='" + name + '\'' +
+                ", callPresence=" + callPresence +
+                ", courseAt=" + courseAt +
+                ", subject=" + subject +
+                ", students=" + students +
+                ", professors=" + professors +
+                ", formation=" + formation +
+                '}';
     }
 }
