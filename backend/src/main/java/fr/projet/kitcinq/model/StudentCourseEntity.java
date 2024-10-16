@@ -3,7 +3,7 @@ package fr.projet.kitcinq.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "student_course")
+@Table(name = "student_courses")
 public class StudentCourseEntity {
 
     @EmbeddedId
