@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface StudentCourseRepository extends JpaRepository<StudentCourseEntity, StudentCourseId> {
 
-    // Méthode pour trouver un StudentCourse par son ID composite
+    // Méthodes pour trouver un StudentCourse par son ID composite
     Optional<StudentCourseEntity> findById(StudentCourseId id);
 }
