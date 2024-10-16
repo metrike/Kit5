@@ -15,27 +15,21 @@ public class StudentCallController {
         this.studentCallService = studentCallService;
     }
 
-    // Route pour lancer l'appel d'un cours
     @PostMapping(value = "/launch/{courseId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void launchCall(@PathVariable int courseId) {
-        System.out.println("Launching call for course " + courseId);
+    public void launchCall(@PathVariable long courseId) {
         studentCallService.launch(courseId);
     }
 
-    // Route pour marquer un étudiant comme présent
     @PostMapping(value = "/mark-present/{courseId}/{studentId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void markStudentPresent(@PathVariable int courseId, @PathVariable int studentId) {
-        System.out.println("Marking student " + studentId + " as present for course " + courseId);
+    public void markStudentPresent(@PathVariable long courseId, @PathVariable long studentId) {
         studentCallService.setStudentPresent(courseId, studentId);
     }
 
-    // Route pour marquer un étudiant comme absent
     @PostMapping(value = "/mark-absent/{courseId}/{studentId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void markStudentAbsent(@PathVariable int courseId, @PathVariable int studentId) {
-        System.out.println("Marking student " + studentId + " as absent for course " + courseId);
+    public void markStudentAbsent(@PathVariable long courseId, @PathVariable long studentId) {
         studentCallService.setStudentAbsent(courseId, studentId);
     }
 }
