@@ -11,11 +11,11 @@ services:
       volumes:
         - my_db_volume:/var/lib/mysql
 
-#  phpmyadmin:
-#    image: phpmyadmin/phpmyadmin
-#    environment:
-#      PMA_HOST: db
-#    ports:
-#      - "8081:80"
+ phpmyadmin:
+   image: phpmyadmin/phpmyadmin
+   environment:
+     PMA_HOST: db
+   ports:
+     - "8081:80"
 volumes:
   my_db_volume:
