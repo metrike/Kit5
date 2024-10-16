@@ -41,13 +41,13 @@ public class CustomUserDetailsService implements UserDetailsService {
         Set<GrantedAuthority> authorities = new HashSet<>();
 
         if (studentRepository.existsByUserId(userEntity.getId())) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
+            authorities.add(new SimpleGrantedAuthority(Role.ROLE_STUDENT));
         }
         else if (professorRepository.existsByUserId(userEntity.getId())) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_PROFESSOR"));
+            authorities.add(new SimpleGrantedAuthority(Role.ROLE_PROFESSOR));
         }
         else if (adminRepository.existsByUserId(userEntity.getId())) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            authorities.add(new SimpleGrantedAuthority(Role.ROLE_ADMIN));
         }
 
         return new User(

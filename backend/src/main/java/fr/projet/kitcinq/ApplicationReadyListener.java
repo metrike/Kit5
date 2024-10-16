@@ -63,10 +63,10 @@ public class ApplicationReadyListener implements ApplicationListener<Application
         Course course5 = courseService.create("Cours 5", LocalDateTime.now().plusDays(3), 2, 3);
 
         UserService.CreateUserResult user1 = userService.create("livio", "livio", LocalDateTime.now());
-//        UserService.CreateUserResult user2 =userService.create("kevin", "kevin", LocalDateTime.now());
-//        UserService.CreateUserResult user3 =userService.create("antho", "antho", LocalDateTime.now());
-//        UserService.CreateUserResult user4 =userService.create("yass", "yass", LocalDateTime.now());
-//        UserService.CreateUserResult user5 = userService.create("abou", "abou", LocalDateTime.now());
+        UserService.CreateUserResult user2 =userService.create("kevin", "kevin", LocalDateTime.now());
+        UserService.CreateUserResult user3 =userService.create("antho", "antho", LocalDateTime.now());
+        UserService.CreateUserResult user4 =userService.create("yass", "yass", LocalDateTime.now());
+        UserService.CreateUserResult user5 = userService.create("abou", "abou", LocalDateTime.now());
 
         adminService.create(user1.id());
     }

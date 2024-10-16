@@ -19,13 +19,13 @@ public class AdminController {
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyRole('ADMIN')")
     public void addProfessorCourse() {
-        userAdminService.addProfessorCourse(1L, 3L);
+        userAdminService.addProfessorCourse(1L, 1L);
     }
 
     @PostMapping(value = "/student-course", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAnyRole('ADMIN')")
     public void addStudentCourse() {
-        userAdminService.addStudentCourse(4L, 1L);
+        userAdminService.addStudentCourse(1L, 1L);
     }
 }

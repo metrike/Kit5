@@ -1,4 +1,4 @@
 package fr.projet.kitcinq.professor;
 
-public class ProfessorService {
+public interface ProfessorService {
 }
