@@ -20,7 +20,7 @@ public class DataBaseCourseService implements CourseService {
     
     @PostConstruct
     public void a() {
-        //create("Math", LocalDateTime.now(), 3);
+//        create("Math", LocalDateTime.now(), 3);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class DataBaseCourseService implements CourseService {
         
         courseEntity.setFormation(formationEntity);
         
-        courseRepository.save(courseEntity);
+//        courseRepository.save(courseEntity);
         
         return new Course(courseEntity.getCourseId().intValue(), courseEntity.getName(), courseEntity.getCourseAt(), courseEntity.getFormation().getFormationId().intValue());
     }

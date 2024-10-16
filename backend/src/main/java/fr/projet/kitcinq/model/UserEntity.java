@@ -29,6 +29,16 @@ public class UserEntity {
     @OneToOne(mappedBy = "users")
     private AdminEntity admin;
 
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public Long getId() {
         return id;
     }
@@ -92,9 +102,6 @@ public class UserEntity {
                ", label='" + label + '\'' +
                ", password='" + password + '\'' +
                ", createdAt=" + createdAt +
-               ", student=" + student +
-               ", professor=" + professor +
-               ", admin=" + admin +
                '}';
     }
 }

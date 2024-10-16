@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
+    UserEntity findByLabel(String label);  // Correction de findyByLabel en findByLabel
+    String findByPassword(String password);  // Correction de findyByPassword en findByPassword
 }
