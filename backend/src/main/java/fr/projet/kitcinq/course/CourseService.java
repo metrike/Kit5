@@ -6,15 +6,13 @@ import java.util.Optional;
 
 public interface CourseService {
     
-    Course create(String name, LocalDateTime courseAt, int formationId);
+    Course create(String name, LocalDateTime courseAt, long formationId, long subjectId);
     
-    void modify(int id, Optional<String> name, Optional<LocalDateTime> courseAt, Optional<Integer> formationId);
+    void modify(long id, Optional<String> name, Optional<LocalDateTime> courseAt, Optional<Long> formationId, Optional<Long> subjectId);
     
-    void delete(int id);
+    void delete(long id);
     
-    Course get(int id);
+    Course get(long id);
     
     List<Course> list(Optional<FormationFilter> formationFilter, Optional<DateFilter> dateFilter);
-    
-    
 }
