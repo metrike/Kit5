@@ -5,6 +5,8 @@ import fr.projet.kitcinq.formation.FormationRepository;
 import fr.projet.kitcinq.model.FormationEntity;
 import fr.projet.kitcinq.model.SubjectEntity;
 import fr.projet.kitcinq.subject.SubjectRepository;
+import fr.projet.kitcinq.user.UserRepository;
+import fr.projet.kitcinq.user.UserService;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -17,11 +19,13 @@ public class ApplicationReadyListener implements ApplicationListener<Application
     private final FormationRepository formationRepository;
     private final SubjectRepository subjectRepository;
     private final CourseService courseService;
+    private final UserService userService;
 
-    public ApplicationReadyListener(FormationRepository formationRepository, SubjectRepository subjectRepository, CourseService courseService) {
+    public ApplicationReadyListener(FormationRepository formationRepository, SubjectRepository subjectRepository, CourseService courseService, UserService userService) {
         this.formationRepository = formationRepository;
         this.subjectRepository = subjectRepository;
         this.courseService = courseService;
+        this.userService = userService;
     }
 
     private void pushSubject(String name) {
@@ -51,5 +55,7 @@ public class ApplicationReadyListener implements ApplicationListener<Application
         courseService.create("Cours 3", LocalDateTime.now().plusDays(1), 3, 3);
         courseService.create("Cours 4", LocalDateTime.now().plusDays(2), 1, 2);
         courseService.create("Cours 5", LocalDateTime.now().plusDays(3), 2, 3);
+        
+        userService.create("livio", "livio", LocalDateTime.now());
     }
 }
