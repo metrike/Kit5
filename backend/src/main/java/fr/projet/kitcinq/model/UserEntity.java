@@ -1,6 +1,5 @@
 package fr.projet.kitcinq.model;
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,25 +18,6 @@ public class UserEntity {
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
-
-    @OneToOne(mappedBy = "users")
-    private StudentEntity student;
-
-    @OneToOne(mappedBy = "users")
-    private ProfessorEntity professor;
-
-    @OneToOne(mappedBy = "users")
-    private AdminEntity admin;
-
-    private String token;
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 
     public Long getId() {
         return id;
@@ -69,30 +49,6 @@ public class UserEntity {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public StudentEntity getStudent() {
-        return student;
-    }
-
-    public void setStudent(StudentEntity student) {
-        this.student = student;
-    }
-
-    public ProfessorEntity getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(ProfessorEntity professor) {
-        this.professor = professor;
-    }
-
-    public AdminEntity getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(AdminEntity admin) {
-        this.admin = admin;
     }
 
     @Override
