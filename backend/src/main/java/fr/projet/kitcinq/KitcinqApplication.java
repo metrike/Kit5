@@ -11,10 +11,6 @@ public class KitcinqApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(KitcinqApplication.class, args);
-
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode("azeAZE123");
-		System.out.println(encodedPassword);
 	}
 
 }

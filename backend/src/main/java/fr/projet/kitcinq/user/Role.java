@@ -16,7 +16,15 @@ public enum Role {
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
     
     public static Optional<Role> fromAuthentication(Authentication authentication) {
+        if (authentication == null) {
+            return Optional.empty();
+        }
+
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+        if (authorities == null) {
+            return Optional.empty();
+        }
         
         if (authorities.stream().anyMatch(authority -> authority.getAuthority().equals(ROLE_STUDENT))) {
             return Optional.of(STUDENT);
