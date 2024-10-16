@@ -10,7 +10,8 @@ public class SubjectEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long subjectId;
-
+    
+    @Column(nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "subject")

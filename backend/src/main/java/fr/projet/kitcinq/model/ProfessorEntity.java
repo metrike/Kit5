@@ -35,6 +35,8 @@ public class ProfessorEntity {
 //            name = "professor_course",
 //            joinColumns = @JoinColumn(name = "professor_id"),
 //            inverseJoinColumns = @JoinColumn(name = "course_id"))
+
+
     private List<CourseEntity> courses;
 
     public Long getProfessorId() {

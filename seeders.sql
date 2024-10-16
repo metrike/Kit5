@@ -23,8 +23,8 @@ VALUES (NULL);
 INSERT INTO users_admin (users_id, admin_id) 
 VALUES (6, 1);
 
-INSERT INTO professor (first_name, last_name, formation_id) 
-VALUES ("Prof", "Doe", NULL);
+INSERT INTO professor (first_name, last_name) 
+VALUES ("Prof", "Doe");
 
 INSERT INTO professor_user (users_id, professor_id) 
 VALUES (7, 1);
