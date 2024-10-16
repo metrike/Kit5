@@ -1,7 +1,7 @@
 "use client"; // Pour indiquer que ce composant est un Client Component
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import Cookies from "universal-cookie";
-import { connexionService } from "@/feature/Connexion/Service/ConnexionService";
+import { connexionService } from "@/feature/connexion/service/ConnexionService";
 import User from "@/entity/User";
 
 const cookies = new Cookies();
