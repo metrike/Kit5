@@ -35,6 +35,30 @@ public class StudentCourseId implements Serializable {
         this.courseId = courseId;
     }
 
+    public StudentCourseId() {}
+
+    public StudentCourseId(Long studentId, Long courseId) {
+        this.studentId = studentId;
+        this.courseId = courseId;
+    }
+
+    // Getters, setters, equals, and hashCode
+    public Long getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
+    }
+
+    public Long getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

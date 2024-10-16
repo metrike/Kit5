@@ -20,7 +20,12 @@ public class StudentCourseEntity {
     private CourseEntity course;
 
     @Column(name = "presence")
-    private boolean presence = false;
+    private boolean presence;
+
+    // Getter and Setter for presence
+    public boolean isPresence() {
+        return presence;
+    }
 
     // Getters, setters, et toString
 
@@ -64,5 +69,24 @@ public class StudentCourseEntity {
                 ", course=" + course +
                 ", presence=" + presence +
                 '}';
+    public void setPresence(boolean presence) {
+        this.presence = presence;
+    }
+
+    // Getters and setters for student and course
+    public StudentEntity getStudent() {
+        return student;
+    }
+
+    public void setStudent(StudentEntity student) {
+        this.student = student;
+    }
+
+    public CourseEntity getCourse() {
+        return course;
+    }
+
+    public void setCourse(CourseEntity course) {
+        this.course = course;
     }
 }

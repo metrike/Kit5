@@ -1,6 +1,5 @@
 package fr.projet.kitcinq.model;
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,25 +18,6 @@ public class UserEntity {
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
-
-    @OneToOne(mappedBy = "users")
-    private StudentEntity student;
-
-    @OneToOne(mappedBy = "users")
-    private ProfessorEntity professor;
-
-    @OneToOne(mappedBy = "users")
-    private AdminEntity admin;
-
-    private String token;
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 
     public Long getId() {
         return id;
@@ -71,20 +51,18 @@ public class UserEntity {
         this.createdAt = createdAt;
     }
 
+    @OneToOne(mappedBy = "users")
+    private StudentEntity student;
+
+    @OneToOne(mappedBy = "users")
+    private ProfessorEntity professor;
+
     public StudentEntity getStudent() {
         return student;
     }
 
     public void setStudent(StudentEntity student) {
         this.student = student;
-    }
-
-    public ProfessorEntity getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(ProfessorEntity professor) {
-        this.professor = professor;
     }
 
     public AdminEntity getAdmin() {
@@ -95,13 +73,27 @@ public class UserEntity {
         this.admin = admin;
     }
 
+    public ProfessorEntity getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(ProfessorEntity professor) {
+        this.professor = professor;
+    }
+
+    @OneToOne(mappedBy = "users")
+    private AdminEntity admin;
+
     @Override
     public String toString() {
-        return "User{" +
-               "id=" + id +
-               ", label='" + label + '\'' +
-               ", password='" + password + '\'' +
-               ", createdAt=" + createdAt +
-               '}';
+        return "UserEntity{" +
+                "id=" + id +
+                ", label='" + label + '\'' +
+                ", password='" + password + '\'' +
+                ", createdAt=" + createdAt +
+                ", student=" + student +
+                ", professor=" + professor +
+                ", admin=" + admin +
+                '}';
     }
 }

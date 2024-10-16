@@ -1,81 +1,77 @@
-INSERT INTO users (users.created_at,users.label,users.password) VALUES (NOW(),"Anthony","azeAZE123"),(NOW(),"Livio","azeAZE123"),(NOW(),"Kevin","azeAZE123"),(NOW(),"Yass","azeAZE123"),(NOW(),"Abou","azeAZE123"),(NOW(),"Admin","azeAZE123"),(NOW(),"Prof","azeAZE123");
+-- Insérer des données dans la table admin
+INSERT INTO `admin` (`admin_id`) VALUES
+(1),
+(2),
+(3);
 
-INSERT INTO student (first_name, last_name) 
-VALUES 
-    ("Anthony", "Doe"),
-    ("Livio", "Doe"),
-    ("Kevin", "Doe"),
-    ("Yass", "Doe"),
-    ("Abou", "Doe");
+-- Insérer des données dans la table users
+INSERT INTO `users` (`created_at`, `id`, `label`, `password`) VALUES
+(NOW(), 1, 'admin_user', '$2a$10$ulpkVJEcJlWGMcrVyIVrBuJ95jzvDa1HFuAdz4mnY3LWx0YNHqOyu'),
+(NOW(), 2, 'professor_user', '$2a$10$ulpkVJEcJlWGMcrVyIVrBuJ95jzvDa1HFuAdz4mnY3LWx0YNHqOyu'),
+(NOW(), 3, 'student_user', '$2a$10$ulpkVJEcJlWGMcrVyIVrBuJ95jzvDa1HFuAdz4mnY3LWx0YNHqOyu');
 
-INSERT INTO user_student (users_id, student_id) 
-VALUES 
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4),
-    (5, 5);
+-- Insérer des données dans la table users_admin
+INSERT INTO `users_admin` (`admin_id`, `users_id`) VALUES
+(1, 1);
 
-INSERT INTO admin (admin_id) 
-VALUES (NULL);
+-- Insérer des données dans la table student
+INSERT INTO `student` (`student_id`, `first_name`, `last_name`) VALUES
+(1, 'John', 'Doe'),
+(2, 'Jane', 'Smith');
 
+-- Insérer des données dans la table user_student
+INSERT INTO `user_student` (`student_id`, `users_id`) VALUES
+(1, 3);
 
-INSERT INTO users_admin (users_id, admin_id) 
-VALUES (6, 1);
+-- Insérer des données dans la table professor
+INSERT INTO `professor` (`professor_id`, `first_name`, `last_name`) VALUES
+(1, 'Dr. Alan', 'Turing'),
+(2, 'Dr. Ada', 'Lovelace');
 
-INSERT INTO professor (first_name, last_name, formation_id) 
-VALUES ("Prof", "Doe", NULL);
+INSERT INTO professor (first_name, last_name) 
+VALUES ("Prof", "Doe");
 
-INSERT INTO professor_user (users_id, professor_id) 
-VALUES (7, 1);
+-- Insérer des données dans la table course
+INSERT INTO `course` (`call_presence`, `course_at`, `course_id`, `name`) VALUES
+(b'1', NOW(), 1, 'Algebra Course'),
+(b'1', NOW(), 2, 'Mechanics Course');
 
-INSERT INTO formation (name) 
-VALUES 
-    ("Informatique"),
-    ("Mathématiques"),
-    ("Physique"),
-    ("Chimie");
-INSERT INTO course (course_at, name) 
-VALUES 
-    (NOW(), "Programmation en Python"),
-    (NOW(), "Algèbre Linéaire"),
-    (NOW(), "Mécanique Quantique"),
-    (NOW(), "Chimie Organique");
-INSERT INTO subject (name) 
-VALUES 
-    ("Programmation"),
-    ("Mathématiques"),
-    ("Physique"),
-    ("Chimie");
-INSERT INTO formation_course (formation_id, course_id) 
-VALUES 
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4);
-INSERT INTO course_subject (subject_id, student_id) 
-VALUES 
-    (1, 1), 
-    (2, 2),
-    (3, 3),
-    (4, 4);
-INSERT INTO student_course (student_id, course_id) 
-VALUES 
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4),
-    (5, 1);
-INSERT INTO professor_courses (professors_professor_id, courses_course_id) 
-VALUES 
-    (1, 1), 
-    (1, 2), 
-    (1, 3), 
-    (1, 4); 
-INSERT INTO student_formation (formation_id, student_id) 
-VALUES 
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4),
-    (1, 5);
+-- Insérer des données dans la table formation
+INSERT INTO `formation` (`formation_id`, `name`) VALUES
+(1, 'Engineering'),
+(2, 'Science');
+
+-- Insérer des données dans la table formation_course
+INSERT INTO `formation_course` (`course_id`, `formation_id`) VALUES
+(1, 1),
+(2, 2);
+
+-- Insérer des données dans la table professor_courses
+INSERT INTO `professor_courses` (`courses_course_id`, `professors_professor_id`) VALUES
+(1, 1),
+(2, 2);
+
+-- Insérer des données dans la table professor_formation
+INSERT INTO `professor_formation` (`formation_id`, `professor_id`) VALUES
+(1, 1),
+(2, 2);
+
+-- Insérer des données dans la table student_course
+INSERT INTO `student_course` (`presence`, `course_id`, `student_id`) VALUES
+(b'1', 1, 1),
+(b'0', 2, 2);
+
+-- Insérer des données dans la table student_formation
+INSERT INTO `student_formation` (`formation_id`, `student_id`) VALUES
+(1, 1),
+(2, 2);
+
+-- Insérer des données dans la table subject
+INSERT INTO `subject` (`subject_id`, `name`) VALUES
+(1, 'Algebra'),
+(2, 'Mechanics');
+
+-- Insérer des données dans la table course_subject
+INSERT INTO `course_subject` (`student_id`, `subject_id`) VALUES
+(1, 1),
+(2, 2);

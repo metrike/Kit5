@@ -1,7 +1,6 @@
 package fr.projet.kitcinq.model;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,6 +11,7 @@ public class FormationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long formationId;
 
+    @Column(nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "formation")

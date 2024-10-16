@@ -1,4 +1,5 @@
 package fr.projet.kitcinq.model;
+
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -15,10 +16,13 @@ public class CourseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;
 
+    @Column(nullable = false)
     private String name;
 
-    private Boolean callPresence;
+    @Column(nullable = false)
+    private Boolean callPresence = false;
 
+    @Column(nullable = false)
     private LocalDateTime courseAt;
 
     @ManyToOne
@@ -62,8 +66,8 @@ public class CourseEntity {
         return courseAt;
     }
 
-    public void setCourseAt(LocalDateTime courseDate) {
-        this.courseAt = courseDate;
+    public void setCourseAt(LocalDateTime courseAt) {
+        this.courseAt = courseAt;
     }
 
     public SubjectEntity getSubject() {
@@ -94,7 +98,7 @@ public class CourseEntity {
         return callPresence;
     }
 
-    public void setCall(Boolean callPresence) {
+    public void setCallPresence(Boolean callPresence) {
         this.callPresence = callPresence;
     }
 
@@ -122,5 +126,4 @@ public class CourseEntity {
 //               ", formation=" + formation +
                '}';
     }
-
 }

@@ -34,6 +34,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/user/connect","/admin/addProfCourse","/admin/addStudentCourse").permitAll()  // Public paths
+                        .requestMatchers("/user/connect","/student-call/**").permitAll()// Public paths
                         .anyRequest().authenticated())  // All other requests must be authenticated
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));  // Stateless sessions for JWT
 
