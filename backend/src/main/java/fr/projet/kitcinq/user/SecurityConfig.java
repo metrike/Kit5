@@ -56,6 +56,7 @@ public class SecurityConfig {
     }
 
     private static final String[] OPENED_RESOURCES = {
+            "/",
             "/me",
             "/swagger-ui/**",
             "/swagger-resources",
