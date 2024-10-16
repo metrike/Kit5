@@ -7,24 +7,27 @@ import fr.projet.kitcinq.formation.FormationRepository;
 import fr.projet.kitcinq.model.FormationEntity;
 import fr.projet.kitcinq.model.SubjectEntity;
 import fr.projet.kitcinq.subject.SubjectRepository;
-import fr.projet.kitcinq.user.UserRepository;
 import fr.projet.kitcinq.user.UserService;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Component
-public class ApplicationReadyListener implements ApplicationListener<ApplicationReadyEvent> {
+public class SeederDatabaseDevelopment implements ApplicationListener<ApplicationReadyEvent> {
     
+    private final Environment environment;
     private final FormationRepository formationRepository;
     private final SubjectRepository subjectRepository;
     private final CourseService courseService;
     private final UserService userService;
     private final AdminService adminService;
 
-    public ApplicationReadyListener(FormationRepository formationRepository, SubjectRepository subjectRepository, CourseService courseService, UserService userService, AdminService adminService) {
+    public SeederDatabaseDevelopment(Environment environment, FormationRepository formationRepository, SubjectRepository subjectRepository, CourseService courseService, UserService userService, AdminService adminService) {
+        this.environment = environment;
         this.formationRepository = formationRepository;
         this.subjectRepository = subjectRepository;
         this.courseService = courseService;
@@ -48,6 +51,10 @@ public class ApplicationReadyListener implements ApplicationListener<Application
     
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
+        if (! Set.of(environment.getActiveProfiles()).contains("dev")) {
+            return;
+        }
+        
         FormationEntity formation1 = pushFormation("Informatique");
         FormationEntity formation2 = pushFormation("Mathématiques");
         FormationEntity formation3 = pushFormation("Physique");
