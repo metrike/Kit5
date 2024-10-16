@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "professor")
-public class ProfessorEntity extends UserEntity {
+public class ProfessorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +35,8 @@ public class ProfessorEntity extends UserEntity {
 //            name = "professor_course",
 //            joinColumns = @JoinColumn(name = "professor_id"),
 //            inverseJoinColumns = @JoinColumn(name = "course_id"))
+
+
     private List<CourseEntity> courses;
 
     public Long getProfessorId() {

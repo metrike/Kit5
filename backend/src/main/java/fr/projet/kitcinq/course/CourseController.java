@@ -19,14 +19,22 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    public record CreateCourseRequestBody(String name, LocalDateTime courseAt, int formationId) {
+    public record CreateCourseRequestBody(String name, LocalDateTime courseAt, long formationId, long subjectId) {
+        public CreateCourseRequestBody {
+            if (name.isBlank()) {
+                throw new IllegalArgumentException("name is blank");
+            }
+            if (courseAt == null) {
+                throw new IllegalArgumentException("courseAt is null");
+            }
+        }
     }
 
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public Course create(@RequestBody CreateCourseRequestBody body) {
-        return courseService.create(body.name, body.courseAt, body.formationId);
+        return courseService.create(body.name, body.courseAt, body.formationId, body.subjectId);
     }
 
     @DeleteMapping("/{id}")
@@ -34,16 +42,16 @@ public class CourseController {
         courseService.delete(id);
     }
 
-    public record GetCourseByIdResponseBody(int id, String name, LocalDateTime courseAt) {
+    public record GetCourseByIdResponseBody(int id, String name, LocalDateTime courseAt, long formationId, String formationName, long subjectId, String subjectName) {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public GetCourseByIdResponseBody getById(@PathVariable int id) {
         Course course = courseService.get(id);
-        return new GetCourseByIdResponseBody(course.id(), course.name(), course.courseAt());
+        return new GetCourseByIdResponseBody(course.id(), course.name(), course.courseAt(), course.formationId(), course.formationName(), course.subjectId(), course.subjectName());
     }
     
-    public record ListCourseResponseBody(int id, String name, LocalDateTime courseAt) {
+    public record ListCourseResponseBody(int id, String name, LocalDateTime courseAt, long formationId, String formationName, long subjectId, String subjectName) {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -57,7 +65,7 @@ public class CourseController {
         return courseService
                 .list(formationFilter, dateFilter)
                 .stream()
-                .map(course -> new ListCourseResponseBody(course.id(), course.name(), course.courseAt()))
+                .map(course -> new ListCourseResponseBody(course.id(), course.name(), course.courseAt(), course.formationId(), course.formationName(), course.subjectId(), course.subjectName()))
                 .toList();
     }
 }

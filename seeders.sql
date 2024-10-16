@@ -28,9 +28,8 @@ INSERT INTO `professor` (`professor_id`, `first_name`, `last_name`) VALUES
 (1, 'Dr. Alan', 'Turing'),
 (2, 'Dr. Ada', 'Lovelace');
 
--- Insérer des données dans la table professor_user
-INSERT INTO `professor_user` (`professor_id`, `users_id`) VALUES
-(1, 2);
+INSERT INTO professor (first_name, last_name) 
+VALUES ("Prof", "Doe");
 
 -- Insérer des données dans la table course
 INSERT INTO `course` (`call_presence`, `course_at`, `course_id`, `name`) VALUES

@@ -51,6 +51,39 @@ public class UserEntity {
         this.createdAt = createdAt;
     }
 
+    @OneToOne(mappedBy = "users")
+    private StudentEntity student;
+
+    @OneToOne(mappedBy = "users")
+    private ProfessorEntity professor;
+
+    public StudentEntity getStudent() {
+        return student;
+    }
+
+    public void setStudent(StudentEntity student) {
+        this.student = student;
+    }
+
+    public AdminEntity getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(AdminEntity admin) {
+        this.admin = admin;
+    }
+
+    public ProfessorEntity getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(ProfessorEntity professor) {
+        this.professor = professor;
+    }
+
+    @OneToOne(mappedBy = "users")
+    private AdminEntity admin;
+
     @Override
     public String toString() {
         return "User{" +
