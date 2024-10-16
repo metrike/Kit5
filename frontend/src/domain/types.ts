@@ -1,0 +1,1 @@
+type Role = 'student' | 'professor' | 'admin';

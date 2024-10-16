@@ -1,10 +1,10 @@
 "use client"; // Pour indiquer que ce composant est un Client Component
 
 import { useState } from "react";
-import { connexionService } from "@/feature/Connexion/Service/ConnexionService";
+import { connexionService } from "@/feature/connexion/service/ConnexionService";
 import User from "@/entity/User";
 
-import { useAuth } from "@/feature/Connexion/AuthProvider";
+import { useAuth } from "@/feature/connexion/AuthProvider";
 
 
 export const Connexion = () => {
