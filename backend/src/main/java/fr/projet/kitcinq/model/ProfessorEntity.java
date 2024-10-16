@@ -24,6 +24,10 @@ public class ProfessorEntity {
 
     @ManyToOne
     @JoinColumn(name = "formation_id")
+    @JoinTable(
+            name = "professor_formation",
+            joinColumns = @JoinColumn(name = "professor_id"),
+            inverseJoinColumns = @JoinColumn(name = "formation_id"))
     private FormationEntity formation;
 
     @ManyToMany

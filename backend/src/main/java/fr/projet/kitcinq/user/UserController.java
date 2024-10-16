@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,9 +21,11 @@ public class UserController {
     public static final Logger LOG = LoggerFactory.getLogger(UserController.class);
     
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;  // Injection du PasswordEncoder
 
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
     
     public record CreateUserRequestBody(String label, String password) {}
@@ -58,7 +61,10 @@ public class UserController {
         // Find user by label
         UserEntity user = userRepository.findByLabel(body.label());
 
-        if (user != null && user.getPassword().trim().equals(body.password().trim())) {
+        // Check if user exists and password is correct
+        System.out.println(user.getPassword());
+
+        if (user != null && passwordEncoder.matches(body.password(), user.getPassword())) {
             // Generate JWT token if authentication is successful
             String token = jwtTokenUtil.generateToken(user.getLabel());
             user.setToken(token);
