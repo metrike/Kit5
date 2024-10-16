@@ -1,4 +1,4 @@
-package fr.projet.kitcinq.studentcall;
+package fr.projet.kitcinq.student.call;
 
 public interface StudentCallService {
     void launch(long courseId);

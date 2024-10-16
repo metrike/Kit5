@@ -23,15 +23,17 @@ public class StudentCourseEntity {
     private boolean presence;
 
     // Getter and Setter for presence
-    public boolean isPresence() {
-        return presence;
+
+    // Getters, setters, et toString
+
+    public StudentCourseId getId() {
+        return id;
     }
 
-    public void setPresence(boolean presence) {
-        this.presence = presence;
+    public void setId(StudentCourseId id) {
+        this.id = id;
     }
 
-    // Getters and setters for student and course
     public StudentEntity getStudent() {
         return student;
     }
@@ -46,5 +48,23 @@ public class StudentCourseEntity {
 
     public void setCourse(CourseEntity course) {
         this.course = course;
+    }
+
+    public boolean isPresence() {
+        return presence;
+    }
+
+    public void setPresence(boolean presence) {
+        this.presence = presence;
+    }
+
+    @Override
+    public String toString() {
+        return "StudentCourseEntity{" +
+                "id=" + id +
+                ", student=" + student +
+                ", course=" + course +
+                ", presence=" + presence +
+                '}';
     }
 }

@@ -1,6 +1,8 @@
 package fr.projet.kitcinq.model;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,7 +27,7 @@ public class StudentEntity {
     private FormationEntity formation;
 
     @OneToMany(mappedBy = "student")
-    private Set<StudentCourseEntity> courses;
+    private Set<StudentCourseEntity> courses=new HashSet<>();
 
     public Long getStudentId() {
         return studentId;

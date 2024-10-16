@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/user")
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
-    
+
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -30,9 +30,9 @@ public class UserController {
         var result = userService.create(body.username(), body.password(), LocalDateTime.now());
         return new CreateUserResponseBody(result.id(), result.username(), result.createdAt());
     }
-    
+
     public record GetAllUserResponse(Long id, String username, LocalDateTime createdAt) {}
-    
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
     public List<GetAllUserResponse> getAll() {
