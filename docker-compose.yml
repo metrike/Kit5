@@ -7,15 +7,15 @@ services:
         MYSQL_PASSWORD: 'motdepasse'
         MYSQL_ROOT_PASSWORD: 'motdepasse_root'
       ports:
-        - "4444:3306"
+        - "3306:3306"
       volumes:
         - my_db_volume:/var/lib/mysql
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: db
-    ports:
-      - "8081:80"
+#  phpmyadmin:
+#    image: phpmyadmin/phpmyadmin
+#    environment:
+#      PMA_HOST: db
+#    ports:
+#      - "8081:80"
 volumes:
   my_db_volume:

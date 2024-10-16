@@ -12,15 +12,18 @@ public class CourseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;
-
+    
+    @Column(nullable = false)
     private String name;
 
-    private Boolean callPresence;
-
+    @Column(nullable = false)
+    private Boolean callPresence = false;
+    
+    @Column(nullable = false)
     private LocalDateTime courseAt;
 
     @ManyToOne
-    @JoinColumn(name = "subject_id")  // Correct mapping to SubjectEntity
+    @JoinColumn(name = "subject_id", nullable = false)  // Correct mapping to SubjectEntity
     private SubjectEntity subject;
 
     @OneToMany(mappedBy = "course")  // Correct mapping to StudentCourseEntity
@@ -30,7 +33,7 @@ public class CourseEntity {
     private List<ProfessorEntity> professors;
 
     @ManyToOne
-    @JoinColumn(name = "formation_id")  // Correct mapping to FormationEntity
+    @JoinColumn(name = "formation_id", nullable = false)  // Correct mapping to FormationEntity
     private FormationEntity formation;
 
     // Getters and setters

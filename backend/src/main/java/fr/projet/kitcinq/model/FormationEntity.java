@@ -10,7 +10,8 @@ public class FormationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long formationId;
-
+    
+    @Column(nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "formation")
