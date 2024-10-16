@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class DatabaseUserService implements UserService {
@@ -27,5 +28,14 @@ public class DatabaseUserService implements UserService {
         userRepository.save(user);
         
         return new CreateUserResult(user.getId(), user.getUsername(), user.getCreatedAt());
+    }
+
+    @Override
+    public List<GetAllUserResult> getAll() {
+        return userRepository
+                .findAll()
+                .stream()
+                .map(user -> new GetAllUserResult(user.getId(), user.getUsername(), user.getCreatedAt()))
+                .toList();
     }
 }

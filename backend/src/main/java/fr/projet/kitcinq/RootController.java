@@ -2,6 +2,7 @@ package fr.projet.kitcinq;
 
 import fr.projet.kitcinq.user.Role;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,12 @@ public class RootController {
     
     @GetMapping(value = "/", produces = MediaType.TEXT_PLAIN_VALUE)
     public String index() {
+        return "OK";
+    }
+    
+    @GetMapping(value = "/private", produces = MediaType.TEXT_PLAIN_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER', 'PROFESSOR')")
+    public String privateEndpoint() {
         return "OK";
     }
 }
