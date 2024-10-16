@@ -19,14 +19,14 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    public record CreateCourseRequestBody(String name, LocalDateTime courseAt) {
+    public record CreateCourseRequestBody(String name, LocalDateTime courseAt, int formationId) {
     }
 
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public Course create(@RequestBody CreateCourseRequestBody body) {
-        return courseService.create(body.name, body.courseAt);
+        return courseService.create(body.name, body.courseAt, body.formationId);
     }
 
     @DeleteMapping("/{id}")
