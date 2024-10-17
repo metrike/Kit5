@@ -54,6 +54,7 @@ public class SeederDatabaseDevelopment implements ApplicationListener<Applicatio
         if (! Set.of(environment.getActiveProfiles()).contains("dev")) {
             return;
         }
+        System.out.println("SeederDatabaseDevelopment.onApplicationEvent");
         
         FormationEntity formation1 = pushFormation("Informatique");
         FormationEntity formation2 = pushFormation("Mathématiques");

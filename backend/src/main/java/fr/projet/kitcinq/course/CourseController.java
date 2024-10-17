@@ -3,6 +3,7 @@ package fr.projet.kitcinq.course;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -66,6 +67,24 @@ public class CourseController {
                 .list(formationFilter, dateFilter)
                 .stream()
                 .map(course -> new ListCourseResponseBody(course.id(), course.name(), course.courseAt(), course.formationId(), course.formationName(), course.subjectId(), course.subjectName()))
+                .toList();
+    }
+
+    @GetMapping(value = "/all-course", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public List<ListCourseResponseBody> getAllCourses() {
+        return courseService
+                .getAllCourses()
+                .stream()
+                .map(courseEntity -> new ListCourseResponseBody(
+                        courseEntity.getCourseId().intValue(),
+                        courseEntity.getName(),
+                        courseEntity.getCourseAt(),
+                        courseEntity.getFormation().getFormationId(),
+                        courseEntity.getFormation().getName(),
+                        courseEntity.getSubject().getSubjectId(),
+                        courseEntity.getSubject().getName()
+                ))
                 .toList();
     }
 }

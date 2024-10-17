@@ -107,6 +107,11 @@ public class DataBaseCourseService implements CourseService {
                 .toList();
     }
 
+    @Override
+    public List<CourseEntity> getAllCourses() {
+        return courseRepository.findAll();
+    }
+
     static boolean filter(CourseEntity entity, Optional<FormationFilter> formationFilter, Optional<DateFilter> dateFilter) {
         boolean isFormationFilter = true;
         boolean isDateFilter = true;
