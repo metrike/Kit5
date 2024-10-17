@@ -1,6 +1,6 @@
 "use client"; // Indique que ce composant est un Client Component
 import { useEffect, useState } from "react";
-import { getAllCourse, getAllStudent } from "@/repository";
+import {addStudentCourse, getAllCourse, getAllStudent} from "@/repository";
 import Courses from "@/entity/Courses";
 import Students from "@/entity/Students";
 
@@ -29,6 +29,21 @@ const Page = () => {
     // Gestion de la sélection de l'étudiant
     const handleStudentChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedStudent(event.target.value);
+    };
+
+    // Fonction appelée lors du clic sur "Valider"
+    const handleSubmit = () => {
+        if (!selectedCourse || !selectedStudent) {
+            alert("Veuillez sélectionner un cours et un étudiant.");
+            return;
+        }
+
+        // Action à réaliser avec les identifiants (par exemple, envoyer à une API)
+        console.log(`Cours ID: ${selectedCourse}, Étudiant ID: ${selectedStudent}`);
+
+        // Vous pouvez remplacer ceci par un appel à une API
+        // alert(`Cours ID: ${selectedCourse}, Étudiant ID: ${selectedStudent}`);
+        addStudentCourse(parseInt(selectedCourse), parseInt(selectedStudent))
     };
 
     return (
@@ -96,6 +111,17 @@ const Page = () => {
                         </p>
                     </div>
                 )}
+
+                {/* Bouton Valider */}
+                <div className="mt-6">
+                    <button
+                        type="button"
+                        onClick={handleSubmit}
+                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                        Valider
+                    </button>
+                </div>
             </div>
         </div>
     );

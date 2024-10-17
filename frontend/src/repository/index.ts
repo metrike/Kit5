@@ -68,3 +68,43 @@ export const getAllStudent = async ():Promise<Students[]> => {
         throw new Error("Erreur de connexion: " + error);
     }
 }
+
+export const addStudentCourse = async (studentId: number, courseId: number):Promise<void> => {
+
+    const authentication: Authentication = {
+        username: 'livio',
+        password: 'livio'
+    }
+
+    const body = JSON.stringify({
+        studentId: studentId,
+        courseId: courseId
+    });
+
+    try {
+        // const response = await fetch(`http://localhost:8080/admin/student-course`, {
+        //     method: 'POST',
+        //     headers: generateBasicAuthHeader(authentication),
+        //     'Content-Type': 'application/json',         // Spécifie que le corps de la requête est JSON
+        //     body: body,
+        //
+        // });
+
+        const url = new URL(`http://localhost:8080/admin/student-course`+`/${courseId}/${studentId}`);
+        // url.searchParams.append('courseId', courseId.toString());
+        // url.searchParams.append('studentId', studentId.toString());
+
+        // Effectuer la requête GET avec query parameters
+        const response = await fetch(url.toString(), {
+            method: 'POST',  // Vous pouvez aussi utiliser GET si nécessaire
+            headers: generateBasicAuthHeader(authentication)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erreur du serveur : ${response.status}`);
+        }
+
+    } catch (error) {
+        throw new Error("Erreur de connexion: " + error);
+    }
+}
