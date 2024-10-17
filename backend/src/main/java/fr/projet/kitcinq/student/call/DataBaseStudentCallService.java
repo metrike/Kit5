@@ -1,6 +1,5 @@
 package fr.projet.kitcinq.student.call;
 
-import fr.projet.kitcinq.student.course.StudentCourseRepository;
 import fr.projet.kitcinq.course.CourseRepository;
 import fr.projet.kitcinq.model.CourseEntity;
 import fr.projet.kitcinq.model.StudentCourseEntity;

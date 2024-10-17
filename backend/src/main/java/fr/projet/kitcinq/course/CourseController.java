@@ -49,8 +49,7 @@ public class CourseController {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public GetCourseByIdResponseBody getById(@PathVariable int id) {
         Course course = courseService.get(id);
-        LocalDateTime courseEnd = course.courseAt().plusHours(1);  // Calcul du courseEnd
-        return new GetCourseByIdResponseBody(course.id(), course.name(), course.courseAt(), courseEnd, course.formationId(), course.formationName(), course.subjectId(), course.subjectName());
+        return new GetCourseByIdResponseBody(course.id(), course.name(), course.courseAt(), course.formationId(), course.formationName(), course.subjectId(), course.subjectName());
     }
 
     public record ListCourseResponseBody(int id, String name, LocalDateTime courseAt, LocalDateTime courseEnd, long formationId, String formationName, long subjectId, String subjectName) {
@@ -61,16 +60,31 @@ public class CourseController {
         Optional<FormationFilter> formationFilter = Optional.ofNullable(formation).map(FormationFilter::new);
         LocalDateTime filterStart = Optional.ofNullable(start).map(LocalDateTime::parse).orElse(LocalDateTime.MIN);
         LocalDateTime filterEnd = Optional.ofNullable(end).map(LocalDateTime::parse).orElse(LocalDateTime.MAX);
-
+        
         Optional<DateFilter> dateFilter = Optional.of(new DateFilter(filterStart, filterEnd));
 
         return courseService
                 .list(formationFilter, dateFilter)
                 .stream()
-                .map(course -> {
-                    LocalDateTime courseEnd = course.courseAt().plusHours(1);  // Calcul du courseEnd pour chaque cours
-                    return new ListCourseResponseBody(course.id(), course.name(), course.courseAt(), courseEnd, course.formationId(), course.formationName(), course.subjectId(), course.subjectName());
-                })
+                .map(course -> new ListCourseResponseBody(course.id(), course.name(), course.courseAt(), course.formationId(), course.formationName(), course.subjectId(), course.subjectName()))
+                .toList();
+    }
+
+    @GetMapping(value = "/all-course", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public List<ListCourseResponseBody> getAllCourses() {
+        return courseService
+                .getAllCourses()
+                .stream()
+                .map(courseEntity -> new ListCourseResponseBody(
+                        courseEntity.getCourseId().intValue(),
+                        courseEntity.getName(),
+                        courseEntity.getCourseAt(),
+                        courseEntity.getFormation().getFormationId(),
+                        courseEntity.getFormation().getName(),
+                        courseEntity.getSubject().getSubjectId(),
+                        courseEntity.getSubject().getName()
+                ))
                 .toList();
     }
 }

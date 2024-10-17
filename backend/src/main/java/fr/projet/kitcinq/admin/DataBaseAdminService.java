@@ -1,6 +1,6 @@
 package fr.projet.kitcinq.admin;
 
-import fr.projet.kitcinq.student.course.StudentCourseRepository;
+import fr.projet.kitcinq.student.call.StudentCourseRepository;
 import fr.projet.kitcinq.course.CourseRepository;
 import fr.projet.kitcinq.model.*;
 import fr.projet.kitcinq.professor.ProfessorRepository;
