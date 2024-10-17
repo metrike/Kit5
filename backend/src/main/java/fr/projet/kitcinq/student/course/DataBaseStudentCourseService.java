@@ -6,6 +6,7 @@ import fr.projet.kitcinq.model.StudentCourseId;
 import fr.projet.kitcinq.model.StudentEntity;
 import fr.projet.kitcinq.student.StudentRepository;
 import fr.projet.kitcinq.course.CourseRepository;
+import fr.projet.kitcinq.student.call.StudentCourseRepository;
 import org.springframework.stereotype.Service;
 
 @Service
