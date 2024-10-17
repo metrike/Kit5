@@ -12,4 +12,6 @@ public interface UserService {
     record GetAllUserResult(Long id, String username, LocalDateTime createdAt) {}
 
     List<GetAllUserResult> getAll();
+
+    boolean connect(String username, String password);
 }

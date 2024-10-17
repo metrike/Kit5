@@ -25,8 +25,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const login = async (user: User) => {
         try {
-            const token = await connexionService(user); // appel au service de connexion
-            cookies.set("token", token, { path: "/", secure: true, sameSite: "strict" });
+            const token = await connexionService(user); 
+            console.log(token);
+            
             setIsAuthenticated(true);
         } catch (error) {
             console.error("Erreur de connexion:", error);

@@ -2,7 +2,7 @@ import {env} from "@/env";
 import {Authentication, MeResponse} from "@/repository/types";
 import {StatusCodes} from "http-status-codes";
 
-function generateBasicAuthHeader(authentication: Authentication) {
+export function generateBasicAuthHeader(authentication: Authentication) {
     return {
         'Authorization': 'Basic ' + btoa(`${authentication.username}:${authentication.password}`)
     }

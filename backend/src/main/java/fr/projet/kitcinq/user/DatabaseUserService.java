@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DatabaseUserService implements UserService {
@@ -37,5 +38,17 @@ public class DatabaseUserService implements UserService {
                 .stream()
                 .map(user -> new GetAllUserResult(user.getId(), user.getUsername(), user.getCreatedAt()))
                 .toList();
+    }
+
+    @Override
+    public boolean connect(String username, String password) {
+        var user = userRepository.findByUsername(username);
+        if (user == null) {
+            return false;
+        }
+        if (!passwordEncoder.matches(password, user.get().getPassword())) {
+            return false;
+        }
+        return true;
     }
 }

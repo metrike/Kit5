@@ -9,7 +9,7 @@ import { useAuth } from "@/feature/connexion/AuthProvider";
 
 export const Connexion = () => {
     const [user, setUser] = useState<User>({
-        label: "",
+        username: "",
         password: ""
     });
 
@@ -19,7 +19,6 @@ export const Connexion = () => {
         e.preventDefault();
         try {
             const response = await login(user);
-            // console.log("Connexion réussie", response);
         } catch (error) {
             console.error("Erreur de connexion", error);
         }
@@ -38,8 +37,8 @@ export const Connexion = () => {
                             type="text"
                             id="label"
                             name="label"
-                            value={user.label}
-                            onChange={e => setUser({ ...user, label: e.target.value })}
+                            value={user.username}
+                            onChange={e => setUser({ ...user, username: e.target.value })}
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         />
                     </div>

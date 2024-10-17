@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.POST, RequestMethod.GET})
 public class UserController {
 
     private final UserService userService;
@@ -41,5 +41,13 @@ public class UserController {
                 .stream()
                 .map(user -> new GetAllUserResponse(user.id(), user.username(), user.createdAt()))
                 .toList();
+    }
+
+    public record ConnectUserRequestBody(String username, String password) {}
+
+    @PostMapping(value = "/connect", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER', 'PROFESSOR')")
+    public boolean connect(@RequestBody ConnectUserRequestBody body) {
+        return userService.connect(body.username(), body.password());
     }
 }

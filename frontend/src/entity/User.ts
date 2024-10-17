@@ -1,5 +1,5 @@
 interface User {
-    label: string;
+    username: string;
     password: string;
 }
 
