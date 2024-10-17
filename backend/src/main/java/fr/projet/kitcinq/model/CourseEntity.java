@@ -1,50 +1,50 @@
 package fr.projet.kitcinq.model;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "course")
+@Table(name = "courses")
 public class CourseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;
-    
+
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
     private Boolean callPresence = false;
-    
+
     @Column(nullable = false)
     private LocalDateTime courseAt;
 
     @ManyToOne
-    @JoinColumn(name = "subject_id", nullable = false)  // Correct mapping to SubjectEntity
+    @JoinTable(
+            name = "course_subject",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id"))
     private SubjectEntity subject;
 
-    @OneToMany(mappedBy = "course")  // Correct mapping to StudentCourseEntity
-    private Set<StudentCourseEntity> students;
+    @OneToMany(mappedBy = "course")
+    private List<StudentCourseEntity> students = new ArrayList<>();
 
     @ManyToMany(mappedBy = "courses")
-    private List<ProfessorEntity> professors;
+    private List<ProfessorEntity> professors= new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "formation_id", nullable = false)  // Correct mapping to FormationEntity
+    @JoinColumn(name = "formation_id")
+        @JoinTable(
+            name = "formation_course",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "formation_id"))
     private FormationEntity formation;
-
-    // Getters and setters
-
-    public Set<StudentCourseEntity> getStudents() {
-        return students;
-    }
-
-    public void setStudents(Set<StudentCourseEntity> students) {
-        this.students = students;
-    }
 
     public Long getCourseId() {
         return courseId;
@@ -102,17 +102,24 @@ public class CourseEntity {
         this.callPresence = callPresence;
     }
 
+    public List<StudentCourseEntity> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<StudentCourseEntity> students) {
+        this.students = students;
+    }
     @Override
     public String toString() {
         return "CourseEntity{" +
-                "courseId=" + courseId +
-                ", name='" + name + '\'' +
-                ", callPresence=" + callPresence +
-                ", courseAt=" + courseAt +
-                ", subject=" + subject +
-                ", students=" + students +
-                ", professors=" + professors +
-                ", formation=" + formation +
-                '}';
+               "courseId=" + courseId +
+               ", name='" + name + '\'' +
+                ", call=" + callPresence +
+               ", courseDate=" + courseAt +
+               ", subject=" + subject +
+//               ", students=" + students +
+//               ", professors=" + professors +
+//               ", formation=" + formation +
+               '}';
     }
 }

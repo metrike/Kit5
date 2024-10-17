@@ -1,5 +1,6 @@
-package fr.projet.kitcinq.studentcall;
+package fr.projet.kitcinq.student.call;
 
+import fr.projet.kitcinq.student.course.StudentCourseRepository;
 import fr.projet.kitcinq.course.CourseRepository;
 import fr.projet.kitcinq.model.CourseEntity;
 import fr.projet.kitcinq.model.StudentCourseEntity;
@@ -10,8 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class DataBaseStudentCallService implements StudentCallService {
 
-    private final StudentCourseRepository studentCourseRepository;
     private final CourseRepository courseRepository;
+
+    private final StudentCourseRepository studentCourseRepository;
 
     public DataBaseStudentCallService(StudentCourseRepository studentCourseRepository, CourseRepository courseRepository) {
         this.studentCourseRepository = studentCourseRepository;
@@ -22,7 +24,7 @@ public class DataBaseStudentCallService implements StudentCallService {
     @Transactional
     public void setStudentPresent(long courseId, long studentId) {
         StudentCourseId id = new StudentCourseId(studentId, courseId);
-        StudentCourseEntity studentCourse = studentCourseRepository.findById(id).orElseThrow();
+        StudentCourseEntity studentCourse = studentCourseRepository.findById(id).get();
         studentCourse.setPresence(true);
         studentCourseRepository.save(studentCourse);
     }
@@ -31,7 +33,7 @@ public class DataBaseStudentCallService implements StudentCallService {
     @Transactional
     public void setStudentAbsent(long courseId, long studentId) {
         StudentCourseId id = new StudentCourseId(studentId, courseId);
-        StudentCourseEntity studentCourse = studentCourseRepository.findById(id).orElseThrow();
+        StudentCourseEntity studentCourse = studentCourseRepository.findById(id).get();
         studentCourse.setPresence(false);
         studentCourseRepository.save(studentCourse);
     }

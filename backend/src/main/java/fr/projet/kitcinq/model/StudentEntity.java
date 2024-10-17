@@ -1,11 +1,12 @@
 package fr.projet.kitcinq.model;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "student")
+@Table(name = "students")
 public class StudentEntity {
 
     @Id
@@ -16,11 +17,7 @@ public class StudentEntity {
     private String firstName;
 
     @OneToOne
-    @JoinTable(
-            name = "user_student",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "users_id"))
-    private UserEntity users;
+    private UserEntity user;
 
     @ManyToOne
     @JoinTable(
@@ -30,7 +27,7 @@ public class StudentEntity {
     private FormationEntity formation;
 
     @OneToMany(mappedBy = "student")
-    private Set<StudentCourseEntity> courses;
+    private Set<StudentCourseEntity> courses=new HashSet<>();
 
     public Long getStudentId() {
         return studentId;
@@ -56,12 +53,12 @@ public class StudentEntity {
         this.firstName = prenom;
     }
 
-    public UserEntity getUsers() {
-        return users;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUsers(UserEntity users) {
-        this.users = users;
+    public void setUser(UserEntity users) {
+        this.user = users;
     }
 
     public FormationEntity getFormation() {
@@ -78,7 +75,7 @@ public class StudentEntity {
                "studentId=" + studentId +
                ", nom='" + lastName + '\'' +
                ", prenom='" + firstName + '\'' +
-               ", users=" + users +
+               ", users=" + user +
                ", formation=" + formation +
                ", courses=" + courses +
                '}';
