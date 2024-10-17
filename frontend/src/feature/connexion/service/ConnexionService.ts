@@ -6,6 +6,8 @@ export const connexionService = async (user: User) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                login:"livio",
+                password:"livio"
             },
             body: JSON.stringify(user),
         });
