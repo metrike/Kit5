@@ -1,5 +1,7 @@
 package fr.projet.kitcinq.course;
 
+import fr.projet.kitcinq.model.CourseEntity;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -15,4 +17,6 @@ public interface CourseService {
     Course get(long id);
     
     List<Course> list(Optional<FormationFilter> formationFilter, Optional<DateFilter> dateFilter);
+
+    List<CourseEntity> getAllCourses();
 }
