@@ -6,6 +6,9 @@ import fr.projet.kitcinq.course.CourseService;
 import fr.projet.kitcinq.formation.FormationRepository;
 import fr.projet.kitcinq.model.FormationEntity;
 import fr.projet.kitcinq.model.SubjectEntity;
+import fr.projet.kitcinq.professor.ProfessorService;
+import fr.projet.kitcinq.student.StudentService;
+import fr.projet.kitcinq.student.course.StudentCourseService;
 import fr.projet.kitcinq.subject.SubjectRepository;
 import fr.projet.kitcinq.user.UserService;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -25,14 +28,20 @@ public class SeederDatabaseDevelopment implements ApplicationListener<Applicatio
     private final CourseService courseService;
     private final UserService userService;
     private final AdminService adminService;
+    private final StudentService studentService;
+    private final ProfessorService professorService;
+    private final StudentCourseService studentCourseService;
 
-    public SeederDatabaseDevelopment(Environment environment, FormationRepository formationRepository, SubjectRepository subjectRepository, CourseService courseService, UserService userService, AdminService adminService) {
+    public SeederDatabaseDevelopment(Environment environment, FormationRepository formationRepository, SubjectRepository subjectRepository, CourseService courseService, UserService userService, AdminService adminService, StudentService studentService, ProfessorService professorService, StudentCourseService studentCourseService) {
         this.environment = environment;
         this.formationRepository = formationRepository;
         this.subjectRepository = subjectRepository;
         this.courseService = courseService;
         this.userService = userService;
         this.adminService = adminService;
+        this.studentService = studentService;
+        this.professorService = professorService;
+        this.studentCourseService = studentCourseService;
     }
 
     private SubjectEntity pushSubject(String name) {
@@ -76,5 +85,15 @@ public class SeederDatabaseDevelopment implements ApplicationListener<Applicatio
         UserService.CreateUserResult user5 = userService.create("abou", "abou", LocalDateTime.now());
 
         adminService.create(user1.id());
+
+        professorService.create(user2.id(), "kevin", "metri");
+
+        StudentService.CreateStudentResult student1 = studentService.create(user3.id(),"antho", "lala");
+        StudentService.CreateStudentResult student2 = studentService.create(user4.id(),"yass", "haff");
+        StudentService.CreateStudentResult student3 = studentService.create(user5.id(),"abou", "abou");
+
+        studentCourseService.create(student1.id(), course1.id());
+        studentCourseService.create(student2.id(), course1.id());
+        studentCourseService.create(student3.id(), course1.id());
     }
 }
