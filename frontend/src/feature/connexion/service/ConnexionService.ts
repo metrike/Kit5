@@ -6,10 +6,13 @@ export const connexionService = async (user: User) => {
         console.log(generateBasicAuthHeader(user));
         
         
-        const response = await fetch("http://localhost:8080" + '/connect', {
+        const response = await fetch("http://localhost:8080" + '/user/connect', {
             method: 'POST',
             headers:
                 generateBasicAuthHeader(user),
+            body: JSON.stringify({
+                user
+            }),
         });
 
         console.log(response);

@@ -4,6 +4,7 @@ import {StatusCodes} from "http-status-codes";
 
 export function generateBasicAuthHeader(authentication: Authentication) {
     return {
+        'Content-Type': 'application/json',
         'Authorization': 'Basic ' + btoa(`${authentication.username}:${authentication.password}`)
     }
 }

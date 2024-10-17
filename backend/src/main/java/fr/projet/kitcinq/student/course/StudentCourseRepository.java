@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface StudentCourseRepository extends JpaRepository<StudentCourseEntity, StudentCourseId> {
+public interface StudentCourseRepository extends CrudRepository<StudentCourseEntity, StudentCourseId> {
     Optional<StudentCourseEntity> findById(StudentCourseId id);
 }
