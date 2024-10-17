@@ -22,6 +22,8 @@ public class DataBaseStudentCallService implements StudentCallService {
     @Override
     @Transactional
     public void setStudentPresent(long courseId, long studentId) {
+        System.out.println("courseId" + courseId);
+        System.out.println("studentId" + studentId);
         StudentCourseId id = new StudentCourseId(studentId, courseId);
         StudentCourseEntity studentCourse = studentCourseRepository.findById(id).get();
         studentCourse.setPresence(true);

@@ -43,16 +43,17 @@ public class CourseController {
         courseService.delete(id);
     }
 
-    public record GetCourseByIdResponseBody(int id, String name, LocalDateTime courseAt, long formationId, String formationName, long subjectId, String subjectName) {
+
+    public record GetCourseByIdResponseBody(int id, String name, LocalDateTime courseAt, LocalDateTime courseEnd, long formationId, String formationName, long subjectId, String subjectName) {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public GetCourseByIdResponseBody getById(@PathVariable int id) {
         Course course = courseService.get(id);
-        return new GetCourseByIdResponseBody(course.id(), course.name(), course.courseAt(), course.formationId(), course.formationName(), course.subjectId(), course.subjectName());
+        return new GetCourseByIdResponseBody(course.id(), course.name(), course.courseAt(), course.courseAt().plusHours(1), course.formationId(), course.formationName(), course.subjectId(), course.subjectName());
     }
-    
-    public record ListCourseResponseBody(int id, String name, LocalDateTime courseAt, long formationId, String formationName, long subjectId, String subjectName) {
+
+    public record ListCourseResponseBody(int id, String name, LocalDateTime courseAt, LocalDateTime courseEnd, long formationId, String formationName, long subjectId, String subjectName) {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -66,7 +67,7 @@ public class CourseController {
         return courseService
                 .list(formationFilter, dateFilter)
                 .stream()
-                .map(course -> new ListCourseResponseBody(course.id(), course.name(), course.courseAt(), course.formationId(), course.formationName(), course.subjectId(), course.subjectName()))
+                .map(course -> new ListCourseResponseBody(course.id(), course.name(), course.courseAt(), course.courseAt().plusHours(1), course.formationId(), course.formationName(), course.subjectId(), course.subjectName()))
                 .toList();
     }
 
@@ -80,6 +81,7 @@ public class CourseController {
                         courseEntity.getCourseId().intValue(),
                         courseEntity.getName(),
                         courseEntity.getCourseAt(),
+                        courseEntity.getCourseAt().plusHours(1),
                         courseEntity.getFormation().getFormationId(),
                         courseEntity.getFormation().getName(),
                         courseEntity.getSubject().getSubjectId(),
