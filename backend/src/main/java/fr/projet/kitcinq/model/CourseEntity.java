@@ -26,10 +26,7 @@ public class CourseEntity {
     private LocalDateTime courseAt;
 
     @ManyToOne
-    @JoinTable(
-            name = "course_subject",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "subject_id"))
+    @JoinColumn(name = "subject_id")
     private SubjectEntity subject;
 
     @OneToMany(mappedBy = "course")
