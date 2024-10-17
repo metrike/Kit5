@@ -1,8 +1,14 @@
 package fr.projet.kitcinq.model;
-import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "subjects")
@@ -16,11 +22,7 @@ public class SubjectEntity {
     private String name;
 
     @OneToMany(mappedBy = "subject")
-//    @JoinTable(
-//            name = "subject_course",
-//            joinColumns = @JoinColumn(name = "subject_id"),
-//            inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private List<CourseEntity> courses=new ArrayList<>();
+    private List<CourseEntity> courses = new ArrayList<>();
 
     public Long getSubjectId() {
         return subjectId;
