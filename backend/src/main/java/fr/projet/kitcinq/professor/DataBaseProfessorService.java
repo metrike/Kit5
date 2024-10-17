@@ -1,7 +1,9 @@
 package fr.projet.kitcinq.professor;
 
 import fr.projet.kitcinq.model.ProfessorEntity;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DataBaseProfessorService implements ProfessorService {
     
     private final ProfessorRepository professorRepository;
