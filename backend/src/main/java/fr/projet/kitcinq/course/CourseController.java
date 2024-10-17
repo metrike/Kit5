@@ -70,7 +70,7 @@ public class CourseController {
                 .toList();
     }
 
-    @GetMapping(value = "/AllCourse", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/all-course", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN')")
     public List<ListCourseResponseBody> getAllCourses() {
         return courseService
